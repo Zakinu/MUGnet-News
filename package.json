@@ -1,0 +1,16 @@
+{
+  "name": "mugnet-news",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "add": "node scripts/add-news.mjs",
+    "build": "node scripts/build-news.mjs",
+    "check": "node scripts/build-news.mjs --check && node --test",
+    "validate": "node scripts/validate-news.mjs",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
