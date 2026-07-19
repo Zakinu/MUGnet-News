@@ -2,7 +2,8 @@ import { loadNewsFeed } from './news-feed-client.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('[data-news-site="zakinu"]');
-  const requestedLimit = Number.parseInt(container?.dataset.newsLimit || '', 10);
+  if (!container) return;
+  const requestedLimit = Number.parseInt(container.dataset.newsLimit || '', 10);
   loadNewsFeed({
     site: 'zakinu',
     container,

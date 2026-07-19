@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { buildFeed, isSafeUrl, parseNewsMarkdown, publicArticles, validateArticles } from '../scripts/lib/news.mjs';
+import { formatLocalDate, parseArgs } from '../scripts/lib/cli.mjs';
+import { isSafeUrl as isSafeClientUrl } from '../examples/news-feed-client.js';
 
 const source = `---
 id: 2026-07-20-example
@@ -51,4 +53,41 @@ test('drafts, unsafe URLs and raw HTML are rejected', () => {
   assert.match(errors.join('\n'), /drafts are not allowed/);
   assert.match(errors.join('\n'), /unsafe or invalid url/);
   assert.match(errors.join('\n'), /raw HTML/);
+});
+
+test('CLI preserves empty optional URL flags', () => {
+  const args = parseArgs(['--url', '/news/example', '--external-url=']);
+  assert.equal(args.url, '/news/example');
+  assert.equal(args['external-url'], '');
+  assert.equal(Object.hasOwn(args, 'external-url'), true);
+});
+
+test('local dates do not use the UTC calendar day', () => {
+  const nearMidnight = new Date(2026, 6, 20, 0, 30);
+  assert.equal(formatLocalDate(nearMidnight), '2026-07-20');
+});
+
+test('client URL validation matches hash links accepted by feeds', () => {
+  assert.equal(isSafeClientUrl('#section'), true);
+  assert.equal(isSafeClientUrl('#invalid section'), false);
+});
+
+test('site initializers ignore pages without a news container', async () => {
+  let callbacks = 0;
+  globalThis.document = {
+    addEventListener(event, callback) {
+      assert.equal(event, 'DOMContentLoaded');
+      callbacks += 1;
+      callback();
+    },
+    querySelector() { return null; }
+  };
+  try {
+    await import('../examples/mugnet.js?test=no-container');
+    await import('../examples/music.js?test=no-container');
+    await import('../examples/zakinu.js?test=no-container');
+  } finally {
+    delete globalThis.document;
+  }
+  assert.equal(callbacks, 3);
 });

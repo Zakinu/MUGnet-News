@@ -7,9 +7,10 @@ function isValidDate(value) {
   return !Number.isNaN(date.valueOf()) && date.toISOString().slice(0, 10) === value;
 }
 
-function isSafeUrl(value) {
+export function isSafeUrl(value) {
   if (!value) return true;
   if (typeof value !== 'string' || /[\u0000-\u001f\\]/.test(value)) return false;
+  if (value.startsWith('#')) return /^#[A-Za-z][A-Za-z0-9_-]*$/.test(value) || value === '#';
   if (value.startsWith('/')) {
     if (value.startsWith('//')) return false;
     try { return !decodeURIComponent(value).split('/').includes('..'); } catch { return false; }
