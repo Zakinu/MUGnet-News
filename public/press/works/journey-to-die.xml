@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Journey to die Press &amp; Interview</title>
+    <description>Journey to dieに関するプレスリリース、インタビュー、メディア掲載</description>
+    <link>https://mugnet.jp/</link>
+    <atom:link href="https://zakinu.github.io/MUGnet-News/press/works/journey-to-die.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>高校生3人から始まったノベルゲーム制作サークル「MUGnet」が2周年</title>
+      <link>https://www.value-press.com/pressrelease/377658</link>
+      <description>MUGnetの設立2周年、これまでの活動、最大50% OFFの記念セール、2周年記念グッズについて発表したプレスリリースです。</description>
+      <pubDate>Fri, 17 Jul 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">2026-07-17-mugnet-2nd-anniversary</guid>
+    </item>
+  </channel>
+</rss>

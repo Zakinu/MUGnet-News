@@ -1,25 +1,14 @@
 {
   "publicBaseUrl": "https://zakinu.github.io/MUGnet-News/",
   "sites": {
-    "all": {
-      "title": "MUGnet News",
-      "description": "MUGnet関連サイトの最新情報",
-      "link": "https://mugnet.jp/"
-    },
-    "mugnet": {
-      "title": "MUGnet News",
-      "description": "MUGnet公式サイトの最新情報",
-      "link": "https://mugnet.jp/"
-    },
-    "music": {
-      "title": "MUGnet Music Label News",
-      "description": "MUGnet Music Labelの最新情報",
-      "link": "https://music.mugnet.jp/"
-    },
-    "zakinu": {
-      "title": "Zakinu News",
-      "description": "Zakinuの最新情報",
-      "link": "https://zakinu.jp/"
-    }
+    "all": { "title": "MUGnet News", "description": "MUGnet関連サイトの最新情報", "link": "https://mugnet.jp/" },
+    "mugnet": { "title": "MUGnet News", "description": "MUGnet公式サイトの最新情報", "link": "https://mugnet.jp/" },
+    "music": { "title": "MUGnet Music Label News", "description": "MUGnet Music Labelの最新情報", "link": "https://music.mugnet.jp/" },
+    "zakinu": { "title": "Zakinu News", "description": "Zakinuの最新情報", "link": "https://zakinu.jp/" }
+  },
+  "press": {
+    "title": "MUGnet Press & Interview",
+    "description": "MUGnetに関するプレスリリース、インタビュー、メディア掲載",
+    "link": "https://mugnet.jp/"
   }
 }
