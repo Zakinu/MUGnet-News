@@ -78,4 +78,4 @@ const feed = await response.json();
 
 ## GitHub Pages
 
-`.github/workflows/pages.yml`がmain更新時に`public/`をGitHub Pagesへ公開します。Repository settings → Pages → Build and deploymentのSourceは「GitHub Actions」を使用します。公開処理に追加のAPIキーやSecretsは不要です。
+`.github/workflows/pages.yml`をGitHub Actions画面から手動実行すると、`public/`をGitHub Pagesへ公開します。pushやmainへのマージだけでは自動デプロイされません。Repository settings → Pages → Build and deploymentのSourceは「GitHub Actions」を使用します。公開処理に追加のAPIキーやSecretsは不要です。
