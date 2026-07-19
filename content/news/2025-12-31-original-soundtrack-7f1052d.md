@@ -10,6 +10,7 @@ linkText: "MUGnet Music Label"
 published: true
 featured: false
 sites: [zakinu]
+works: [bonten]
 createdAt: 2025-12-31
 updatedAt: 2025-12-31
 ---

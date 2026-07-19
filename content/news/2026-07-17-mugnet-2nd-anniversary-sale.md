@@ -10,6 +10,7 @@ linkText: "セール詳細"
 published: true
 featured: false
 sites: [mugnet, music]
+works: [journey-to-die, bonten]
 createdAt: 2026-07-17
 updatedAt: 2026-07-17
 ---

@@ -10,6 +10,7 @@ linkText: "公式BOOTH"
 published: true
 featured: false
 sites: [mugnet]
+works: [bonten]
 createdAt: 2026-01-01
 updatedAt: 2026-01-01
 ---

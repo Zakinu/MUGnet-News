@@ -17,6 +17,7 @@
         "mugnet",
         "zakinu"
       ],
+      "works": [],
       "createdAt": "2026-07-17",
       "updatedAt": "2026-07-17"
     },
@@ -34,6 +35,7 @@
       "sites": [
         "zakinu"
       ],
+      "works": [],
       "createdAt": "2026-01-10",
       "updatedAt": "2026-01-10"
     },
@@ -50,6 +52,9 @@
       "featured": false,
       "sites": [
         "zakinu"
+      ],
+      "works": [
+        "bonten"
       ],
       "createdAt": "2025-12-31",
       "updatedAt": "2025-12-31"
@@ -68,6 +73,9 @@
       "sites": [
         "zakinu"
       ],
+      "works": [
+        "bonten"
+      ],
       "createdAt": "2025-12-31",
       "updatedAt": "2025-12-31"
     },
@@ -85,6 +93,7 @@
       "sites": [
         "zakinu"
       ],
+      "works": [],
       "createdAt": "2025-08-10",
       "updatedAt": "2025-08-10"
     },
@@ -102,6 +111,7 @@
       "sites": [
         "zakinu"
       ],
+      "works": [],
       "createdAt": "2025-04-03",
       "updatedAt": "2025-04-03"
     },
@@ -119,6 +129,7 @@
       "sites": [
         "zakinu"
       ],
+      "works": [],
       "createdAt": "2025-04-03",
       "updatedAt": "2025-04-03"
     },
@@ -136,6 +147,7 @@
       "sites": [
         "zakinu"
       ],
+      "works": [],
       "createdAt": "2025-04-03",
       "updatedAt": "2025-04-03"
     }

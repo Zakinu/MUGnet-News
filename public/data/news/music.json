@@ -17,6 +17,10 @@
         "mugnet",
         "music"
       ],
+      "works": [
+        "journey-to-die",
+        "bonten"
+      ],
       "createdAt": "2026-07-17",
       "updatedAt": "2026-07-17"
     },
@@ -34,6 +38,9 @@
       "sites": [
         "music"
       ],
+      "works": [
+        "bonten"
+      ],
       "createdAt": "2026-06-01",
       "updatedAt": "2026-06-01"
     },
@@ -50,6 +57,9 @@
       "featured": false,
       "sites": [
         "music"
+      ],
+      "works": [
+        "journey-to-die"
       ],
       "createdAt": "2025-09-11",
       "updatedAt": "2025-09-11"

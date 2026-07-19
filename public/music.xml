@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MUGnet Music Label News</title>
+    <description>MUGnet Music Labelの最新情報</description>
+    <link>https://music.mugnet.jp/</link>
+    <atom:link href="https://zakinu.github.io/MUGnet-News/music.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MUGnet 2周年記念セールを開始しました</title>
+      <link>https://mugnet.jp/</link>
+      <description>MUGnet設立2周年を記念し、2026年7月17日から7月31日まで、対象作品を20〜50% OFFで販売します。</description>
+      <pubDate>Fri, 17 Jul 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">2026-07-17-mugnet-2nd-anniversary-sale</guid>
+    </item>
+    <item>
+      <title>「梵天世界の壊し方 Original Soundtrack」配信開始</title>
+      <link>https://music.mugnet.jp/</link>
+      <description>同人ノベルゲーム『梵天世界の壊し方』の主題歌及び、ゲーム内で使用されたBGMを含む全14曲が6月1日より全世界で配信開始。</description>
+      <pubDate>Mon, 01 Jun 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">2026-06-01-original-soundtrack-663647d</guid>
+    </item>
+    <item>
+      <title>「Journey to die」テーマソング配信開始</title>
+      <link>https://music.mugnet.jp/</link>
+      <description>同人ノベルゲーム「Journey to die」のテーマソングが、オリジナル、ピアノアレンジ、オルゴールアレンジの3バージョンで9月11日より全世界配信開始。</description>
+      <pubDate>Thu, 11 Sep 2025 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">2025-09-11-journey-to-die-b126efe</guid>
+    </item>
+  </channel>
+</rss>

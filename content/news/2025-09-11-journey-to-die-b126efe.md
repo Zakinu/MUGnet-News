@@ -10,6 +10,7 @@ linkText: ""
 published: true
 featured: false
 sites: [music]
+works: [journey-to-die]
 createdAt: 2025-09-11
 updatedAt: 2025-09-11
 ---
