@@ -2,7 +2,7 @@ name: Deploy news feeds to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, agent/extract-news-hub]
   workflow_dispatch:
 
 concurrency:
