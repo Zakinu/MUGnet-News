@@ -196,7 +196,7 @@ export function buildWorkFeed(articles, work) {
       name: work.name
     },
     articles: articles
-      .filter(article => article.published && article.works.includes(work.id))
+      .filter(article => article.published && article.works?.includes(work.id))
       .sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id))
       .map(serializeArticle)
   };
