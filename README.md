@@ -78,4 +78,4 @@ const feed = await response.json();
 
 ## GitHub Pages
 
-`.github/workflows/pages.yml`をGitHub Actions画面から手動実行すると、`public/`をGitHub Pagesへ公開します。pushやmainへのマージだけでは自動デプロイされません。Repository settings → Pages → Build and deploymentのSourceは「GitHub Actions」を使用します。公開処理に追加のAPIキーやSecretsは不要です。
+`.github/workflows/pages.yml`が`main`へのpush（Pull Requestのマージを含む）を検知し、`public/`をGitHub Pagesへ自動公開します。必要な場合はGitHub Actions画面から手動実行することもできます。Repository settings → Pages → Build and deploymentのSourceは「GitHub Actions」を使用します。公開処理に追加のAPIキーやSecretsは不要です。
