@@ -17,10 +17,19 @@ try {
   const date = String(args.date || await prompt.ask('公開日 YYYY-MM-DD', today));
   if (!isValidDate(date)) throw new Error(`Invalid date: ${date}`);
   const { sites: allowedSites } = JSON.parse(await readFile(path.join(root, 'config/news-sites.json'), 'utf8'));
+  const { works: configuredWorks } = JSON.parse(await readFile(path.join(root, 'config/news-works.json'), 'utf8'));
+  const allowedWorks = configuredWorks.map(work => work.id);
   const sites = String(args.sites || await prompt.ask(`掲載先（カンマ区切り: ${allowedSites.join(', ')})`, 'mugnet'))
     .split(',').map(value => value.trim()).filter(Boolean);
   const unknown = sites.filter(site => !allowedSites.includes(site));
   if (unknown.length) throw new Error(`Unknown site(s): ${unknown.join(', ')}`);
+  const works = String(Object.hasOwn(args, 'works')
+    ? args.works
+    : await prompt.ask(`作品ID（カンマ区切り、作品非依存は空: ${allowedWorks.join(', ')})`))
+    .split(',').map(value => value.trim()).filter(Boolean);
+  const unknownWorks = works.filter(work => !allowedWorks.includes(work));
+  if (unknownWorks.length) throw new Error(`Unknown work(s): ${unknownWorks.join(', ')}`);
+  if (new Set(works).size !== works.length) throw new Error('Works must not contain duplicates.');
 
   const category = String(args.category || await prompt.ask('カテゴリ', 'お知らせ'));
   const summary = String(args.summary || await prompt.ask('一覧用の概要'));
@@ -36,7 +45,7 @@ try {
   if (!baseSlug) throw new Error('日本語タイトルの場合は --slug に半角英数字とハイフンのIDを指定してください。');
   const id = `${date}-${baseSlug}`;
   const target = path.join(root, 'content/news', `${id}.md`);
-  const markdown = `---\nid: ${id}\ntitle: ${quoteYaml(title)}\ndate: ${date}\ncategory: ${quoteYaml(category)}\nsummary: ${quoteYaml(summary)}\nurl: ${quoteYaml(url)}\nexternalUrl: ${quoteYaml(externalUrl)}\nlinkText: ${quoteYaml(linkText)}\npublished: true\nfeatured: ${parseBoolean(args.featured, false)}\nsites: [${sites.join(', ')}]\ncreatedAt: ${today}\nupdatedAt: ${today}\n---\n\n${body}\n`;
+  const markdown = `---\nid: ${id}\ntitle: ${quoteYaml(title)}\ndate: ${date}\ncategory: ${quoteYaml(category)}\nsummary: ${quoteYaml(summary)}\nurl: ${quoteYaml(url)}\nexternalUrl: ${quoteYaml(externalUrl)}\nlinkText: ${quoteYaml(linkText)}\npublished: true\nfeatured: ${parseBoolean(args.featured, false)}\nsites: [${sites.join(', ')}]\nworks: [${works.join(', ')}]\ncreatedAt: ${today}\nupdatedAt: ${today}\n---\n\n${body}\n`;
 
   await mkdir(path.dirname(target), { recursive: true });
   await writeFile(target, markdown, { encoding: 'utf8', flag: 'wx' });

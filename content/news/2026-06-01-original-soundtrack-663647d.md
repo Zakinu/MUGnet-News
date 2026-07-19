@@ -10,6 +10,7 @@ linkText: ""
 published: true
 featured: false
 sites: [music]
+works: [bonten]
 createdAt: 2026-06-01
 updatedAt: 2026-06-01
 ---

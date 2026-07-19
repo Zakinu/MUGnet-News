@@ -1,26 +1,10 @@
 {
   "schemaVersion": 1,
-  "site": "mugnet",
+  "work": {
+    "id": "journey-to-die",
+    "name": "Journey to die"
+  },
   "articles": [
-    {
-      "id": "2026-07-17-mugnet-2nd-anniversary",
-      "date": "2026-07-17",
-      "title": "MUGnetは2周年を迎えました",
-      "summary": "MUGnetは2026年7月17日に設立2周年を迎えました。2年間の活動を振り返る特設サイトを公開しました。",
-      "body": "MUGnetは2026年7月17日に設立2周年を迎えました。2年間の活動を振り返る特設サイトを公開しました。",
-      "category": "お知らせ",
-      "linkUrl": "https://mugnet.jp/2nd-Anniversary/",
-      "linkText": "2周年記念特設サイト",
-      "external": true,
-      "featured": false,
-      "sites": [
-        "mugnet",
-        "zakinu"
-      ],
-      "works": [],
-      "createdAt": "2026-07-17",
-      "updatedAt": "2026-07-17"
-    },
     {
       "id": "2026-07-17-mugnet-2nd-anniversary-sale",
       "date": "2026-07-17",
@@ -44,104 +28,24 @@
       "updatedAt": "2026-07-17"
     },
     {
-      "id": "2026-06-05-comic-market-108",
-      "date": "2026-06-05",
-      "title": "MUGnet、コミックマーケット108への参加が決定",
-      "summary": "MUGnetは、2026年8月16日開催のコミックマーケット108・2日目に参加します。配置は東7ホール「T14ab」で、2スペースでの参加を予定しています。",
-      "body": "MUGnetは、2026年8月16日開催のコミックマーケット108・2日目に参加します。配置は東7ホール「T14ab」で、2スペースでの参加を予定しています。",
-      "category": "イベント",
-      "linkUrl": "https://x.com/MUGnet0717/status/2062808776919724101",
-      "linkText": "MUGnet公式Xの告知を見る",
-      "external": true,
-      "featured": false,
-      "sites": [
-        "mugnet"
-      ],
-      "works": [
-        "bonten"
-      ],
-      "createdAt": "2026-06-05",
-      "updatedAt": "2026-06-05"
-    },
-    {
-      "id": "2026-02-25-news-455e226",
-      "date": "2026-02-25",
-      "title": "雑誌に梵天世界の壊し方が掲載されました！",
-      "summary": "早川書房様より出版されている、SFマガジンの4月号に梵天世界の壊し方が掲載されました",
-      "body": "早川書房様より出版されている、SFマガジンの4月号に梵天世界の壊し方が掲載されました",
-      "category": "メディア",
-      "linkUrl": "https://x.com/KgPravda/status/2024835294034542845",
-      "linkText": "X.com",
-      "external": true,
-      "featured": false,
-      "sites": [
-        "mugnet"
-      ],
-      "works": [
-        "bonten"
-      ],
-      "createdAt": "2026-02-25",
-      "updatedAt": "2026-02-25"
-    },
-    {
-      "id": "2026-01-01-booth-original-soundtrack-f2de240",
-      "date": "2026-01-01",
-      "title": "公式BOOTHにて梵天世界の壊し方とOriginal Soundtrackの取り扱いを開始しました",
-      "summary": "本日よりBOOTHにてC107で発売した2点の取り扱いを開始しました。",
-      "body": "本日よりBOOTHにてC107で発売した2点の取り扱いを開始しました。",
-      "category": "お知らせ",
-      "linkUrl": "https://mugnet.booth.pm/",
-      "linkText": "公式BOOTH",
-      "external": true,
-      "featured": false,
-      "sites": [
-        "mugnet"
-      ],
-      "works": [
-        "bonten"
-      ],
-      "createdAt": "2026-01-01",
-      "updatedAt": "2026-01-01"
-    },
-    {
-      "id": "2025-12-31-c107-f8fbc9e",
-      "date": "2025-12-31",
-      "title": "梵天世界の壊し方発売！. 本日、C107にて梵天世界の壊し方を発売しました",
-      "summary": "梵天世界の壊し方発売！. 本日、C107にて梵天世界の壊し方を発売しました",
-      "body": "梵天世界の壊し方発売！. 本日、C107にて梵天世界の壊し方を発売しました",
+      "id": "2025-09-11-journey-to-die-b126efe",
+      "date": "2025-09-11",
+      "title": "「Journey to die」テーマソング配信開始",
+      "summary": "同人ノベルゲーム「Journey to die」のテーマソングが、オリジナル、ピアノアレンジ、オルゴールアレンジの3バージョンで9月11日より全世界配信開始。",
+      "body": "同人ノベルゲーム「Journey to die」のテーマソングが、オリジナル、ピアノアレンジ、オルゴールアレンジの3バージョンで9月11日より全世界配信開始。",
       "category": "リリース",
       "linkUrl": "",
       "linkText": "",
       "external": false,
       "featured": false,
       "sites": [
-        "mugnet"
+        "music"
       ],
       "works": [
-        "bonten"
+        "journey-to-die"
       ],
-      "createdAt": "2025-12-31",
-      "updatedAt": "2025-12-31"
-    },
-    {
-      "id": "2025-11-01-news-66dd558",
-      "date": "2025-11-01",
-      "title": "カクヨムにて「梵天世界の壊し方」を連載中",
-      "summary": "先日よりカクヨム様で小説として、MUGnet完全新規作「梵天世界の壊し方」を連載しております。 ▽連載途中の梵天世界の壊し方はこちらから▽ https://kakuyomu.jp/works/822139837654946732 また、それに伴いカクヨムコンテスト11にも応募させていただきますので、そちらも応援していただけますと幸いです。",
-      "body": "先日よりカクヨム様で小説として、MUGnet完全新規作「梵天世界の壊し方」を連載しております。\n▽連載途中の梵天世界の壊し方はこちらから▽\nhttps://kakuyomu.jp/works/822139837654946732\nまた、それに伴いカクヨムコンテスト11にも応募させていただきますので、そちらも応援していただけますと幸いです。",
-      "category": "お知らせ",
-      "linkUrl": "",
-      "linkText": "",
-      "external": false,
-      "featured": false,
-      "sites": [
-        "mugnet"
-      ],
-      "works": [
-        "bonten"
-      ],
-      "createdAt": "2025-11-01",
-      "updatedAt": "2025-11-01"
+      "createdAt": "2025-09-11",
+      "updatedAt": "2025-09-11"
     },
     {
       "id": "2025-09-10-journey-to-die-3-9-11-6ed343a",
@@ -185,24 +89,6 @@
       "updatedAt": "2025-08-17"
     },
     {
-      "id": "2025-07-17-mugnet-1-dba28d2",
-      "date": "2025-07-17",
-      "title": "MUGnet 1周年",
-      "summary": "本日、2025年7月17日に「MUGnet」は1周年を迎えました！ いつも応援してくださっている皆様、本当にありがとうございます。",
-      "body": "本日、2025年7月17日に「MUGnet」は1周年を迎えました！ いつも応援してくださっている皆様、本当にありがとうございます。",
-      "category": "お知らせ",
-      "linkUrl": "https://mugnet.jp/1st-Anniversary/",
-      "linkText": "1周年記念特設サイト",
-      "external": true,
-      "featured": false,
-      "sites": [
-        "mugnet"
-      ],
-      "works": [],
-      "createdAt": "2025-07-17",
-      "updatedAt": "2025-07-17"
-    },
-    {
       "id": "2025-07-17-mugnet1-249909f",
       "date": "2025-07-17",
       "title": "MUGnet1周年記念セール",
@@ -221,26 +107,6 @@
       ],
       "createdAt": "2025-07-17",
       "updatedAt": "2025-07-17"
-    },
-    {
-      "id": "2025-06-14-news-a0a1fac",
-      "date": "2025-06-14",
-      "title": "完全新作『梵天世界の壊し方』発表 - テーマは“変わること”",
-      "summary": "舞台は社会と断絶された村。自らの世界に背を向けた少年と、自らの世界を壊したい少女が出会い、変化と葛藤の物語が展開されます。",
-      "body": "舞台は社会と断絶された村。自らの世界に背を向けた少年と、自らの世界を壊したい少女が出会い、変化と葛藤の物語が展開されます。",
-      "category": "お知らせ",
-      "linkUrl": "https://www.value-press.com/pressrelease/357116",
-      "linkText": "プレスリリース",
-      "external": true,
-      "featured": false,
-      "sites": [
-        "mugnet"
-      ],
-      "works": [
-        "bonten"
-      ],
-      "createdAt": "2025-06-14",
-      "updatedAt": "2025-06-14"
     },
     {
       "id": "2025-05-28-journey-to-die-27f60c6",
@@ -283,42 +149,6 @@
       "updatedAt": "2025-05-24"
     },
     {
-      "id": "2025-03-26-mugnet-2-8428261",
-      "date": "2025-03-26",
-      "title": "MUGnet開発者ブログ #2 公開",
-      "summary": "MUGnet開発者ブログ #2を公開しました。",
-      "body": "MUGnet開発者ブログ #2を公開しました。",
-      "category": "メディア",
-      "linkUrl": "https://www.fanbox.cc/@mugnet/posts/9555981",
-      "linkText": "記事はこちら",
-      "external": true,
-      "featured": false,
-      "sites": [
-        "mugnet"
-      ],
-      "works": [],
-      "createdAt": "2025-03-26",
-      "updatedAt": "2025-03-26"
-    },
-    {
-      "id": "2025-03-26-mugnet-c6d0c6f",
-      "date": "2025-03-26",
-      "title": "MUGnet公式サイトリニューアル",
-      "summary": "MUGnetの公式サイトをリニューアルしました。",
-      "body": "MUGnetの公式サイトをリニューアルしました。",
-      "category": "更新情報",
-      "linkUrl": "",
-      "linkText": "",
-      "external": false,
-      "featured": false,
-      "sites": [
-        "mugnet"
-      ],
-      "works": [],
-      "createdAt": "2025-03-26",
-      "updatedAt": "2025-03-26"
-    },
-    {
       "id": "2025-03-19-journey-to-die-version1-1-2-9bf00bd",
       "date": "2025-03-19",
       "title": "Journey to die Version1.1.2 配信開始",
@@ -335,24 +165,6 @@
       "works": [
         "journey-to-die"
       ],
-      "createdAt": "2025-03-19",
-      "updatedAt": "2025-03-19"
-    },
-    {
-      "id": "2025-03-19-mugnet-1-7ac0f77",
-      "date": "2025-03-19",
-      "title": "MUGnet開発者ブログ #1 公開",
-      "summary": "MUGnet開発者ブログ #1を公開しました。",
-      "body": "MUGnet開発者ブログ #1を公開しました。",
-      "category": "メディア",
-      "linkUrl": "https://www.fanbox.cc/@mugnet/posts/9555965",
-      "linkText": "記事はこちら",
-      "external": true,
-      "featured": false,
-      "sites": [
-        "mugnet"
-      ],
-      "works": [],
       "createdAt": "2025-03-19",
       "updatedAt": "2025-03-19"
     },
@@ -575,24 +387,6 @@
       ],
       "createdAt": "2024-09-05",
       "updatedAt": "2024-09-05"
-    },
-    {
-      "id": "2024-08-22-news-ec88078",
-      "date": "2024-08-22",
-      "title": "公式サイトがオープンしました。",
-      "summary": "公式サイトがオープンしました。",
-      "body": "公式サイトがオープンしました。",
-      "category": "更新情報",
-      "linkUrl": "",
-      "linkText": "",
-      "external": false,
-      "featured": false,
-      "sites": [
-        "mugnet"
-      ],
-      "works": [],
-      "createdAt": "2024-08-22",
-      "updatedAt": "2024-08-22"
     }
   ]
 }

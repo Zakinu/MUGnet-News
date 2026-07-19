@@ -10,6 +10,7 @@ linkText: ""
 published: true
 featured: false
 sites: [mugnet]
+works: [journey-to-die]
 createdAt: 2025-01-16
 updatedAt: 2025-01-16
 ---

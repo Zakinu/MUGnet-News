@@ -10,6 +10,7 @@ linkText: "購入はこちら"
 published: true
 featured: false
 sites: [mugnet]
+works: [journey-to-die]
 createdAt: 2025-02-28
 updatedAt: 2025-02-28
 ---

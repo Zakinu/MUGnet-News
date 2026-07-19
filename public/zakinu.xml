@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Zakinu News</title>
+    <description>Zakinuの最新情報</description>
+    <link>https://zakinu.jp/</link>
+    <atom:link href="https://zakinu.github.io/MUGnet-News/zakinu.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MUGnetは2周年を迎えました</title>
+      <link>https://mugnet.jp/</link>
+      <description>MUGnetは2026年7月17日に設立2周年を迎えました。2年間の活動を振り返る特設サイトを公開しました。</description>
+      <pubDate>Fri, 17 Jul 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">2026-07-17-mugnet-2nd-anniversary</guid>
+    </item>
+    <item>
+      <title>独自レーベルを立ち上げました</title>
+      <link>https://zakinu.jp/</link>
+      <description>MUGnetの楽曲を管理するため、独自レーベル”MUGnet Music Label”を立ち上げました。 企画・実装・管理全てを担当しております</description>
+      <pubDate>Sat, 10 Jan 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">2026-01-10-news-73792c0</guid>
+    </item>
+    <item>
+      <title>梵天世界の壊し方をリリースしました</title>
+      <link>https://zakinu.jp/</link>
+      <description>MUGnetにて、2作品目にあたる「梵天世界の壊し方」をC107にてリリースしプロデュースはもちろんパッケージデザインまで担当しております</description>
+      <pubDate>Wed, 31 Dec 2025 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">2025-12-31-news-f7080eb</guid>
+    </item>
+    <item>
+      <title>梵天世界の壊し方 Original Soundtrackをリリースしました</title>
+      <link>https://zakinu.jp/</link>
+      <description>MUGnetによる「梵天世界の壊し方の壊し方」のオリジナルサウンドトラックになります。 プロデュースとパッケージデザインを担当しております</description>
+      <pubDate>Wed, 31 Dec 2025 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">2025-12-31-original-soundtrack-7f1052d</guid>
+    </item>
+    <item>
+      <title>ポートフォリオサイトをリニューアルしました</title>
+      <link>https://zakinu.jp/</link>
+      <description>デザインはMUGnetと同じ設計を採用し、ニュース記事はNotion APIと連携することで更新を容易にしました</description>
+      <pubDate>Sun, 10 Aug 2025 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">2025-08-10-news-3691851</guid>
+    </item>
+    <item>
+      <title>同人サークル様向けの売上管理システムをリリースしました</title>
+      <link>https://zakinu.jp/</link>
+      <description>同人イベントでの販売管理を容易にすることを目的としています 売上管理、在庫管理、グラフによる視覚的な分析機能を備えており、 下記のリンクから完全無料でお使いいただけます</description>
+      <pubDate>Thu, 03 Apr 2025 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">2025-04-03-news-c69e638</guid>
+    </item>
+    <item>
+      <title>プレスリリースを原文掲載していただきました</title>
+      <link>https://zakinu.jp/</link>
+      <description>簡易POSシステムのプレスリリースを原文掲載していただきました。</description>
+      <pubDate>Thu, 03 Apr 2025 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">2025-04-03-news-e5d2d01</guid>
+    </item>
+    <item>
+      <title>簡易POSシステムのプレスリリースを公開しました</title>
+      <link>https://zakinu.jp/</link>
+      <description>下記のリンクからご覧ください</description>
+      <pubDate>Thu, 03 Apr 2025 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">2025-04-03-pos-562d82d</guid>
+    </item>
+  </channel>
+</rss>

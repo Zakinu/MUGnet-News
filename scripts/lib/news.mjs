@@ -5,7 +5,7 @@ const ID_PATTERN = /^\d{4}-\d{2}-\d{2}-[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const ALLOWED_FIELDS = new Set([
   'id', 'title', 'date', 'category', 'summary', 'url', 'externalUrl',
-  'linkText', 'published', 'featured', 'sites', 'thumbnail', 'createdAt', 'updatedAt'
+  'linkText', 'published', 'featured', 'sites', 'works', 'thumbnail', 'createdAt', 'updatedAt'
 ]);
 
 function parseScalar(raw) {
@@ -63,10 +63,10 @@ export function isSafeUrl(value, { allowEmpty = true } = {}) {
   } catch { return false; }
 }
 
-export function validateArticles(articles, allowedSites, { publicRepository = true } = {}) {
+export function validateArticles(articles, allowedSites, allowedWorks, { publicRepository = true } = {}) {
   const errors = [];
   const ids = new Map();
-  const required = ['id', 'title', 'date', 'summary', 'category', 'published', 'featured', 'sites'];
+  const required = ['id', 'title', 'date', 'summary', 'category', 'published', 'featured', 'sites', 'works'];
 
   for (const article of articles) {
     const label = article.filename || article.id || 'unknown';
@@ -93,6 +93,14 @@ export function validateArticles(articles, allowedSites, { publicRepository = tr
         if (typeof site !== 'string' || !allowedSites.includes(site)) errors.push(`${label}: undefined site "${site}"`);
       }
     }
+    if (!Array.isArray(article.works)) {
+      errors.push(`${label}: works must be an array`);
+    } else {
+      if (new Set(article.works).size !== article.works.length) errors.push(`${label}: works must not contain duplicates`);
+      for (const work of article.works) {
+        if (typeof work !== 'string' || !allowedWorks.includes(work)) errors.push(`${label}: undefined work "${work}"`);
+      }
+    }
     if (typeof article.published !== 'boolean') errors.push(`${label}: published must be true or false`);
     if (publicRepository && article.published !== true) errors.push(`${label}: drafts are not allowed in this public repository`);
     if (typeof article.featured !== 'boolean') errors.push(`${label}: featured must be true or false`);
@@ -115,6 +123,18 @@ export function validateArticles(articles, allowedSites, { publicRepository = tr
 
 export async function loadNewsContent(rootDir) {
   const siteConfig = JSON.parse(await readFile(path.join(rootDir, 'config/news-sites.json'), 'utf8'));
+  const workConfig = JSON.parse(await readFile(path.join(rootDir, 'config/news-works.json'), 'utf8'));
+  const workIds = workConfig.works.map(work => work.id);
+  const configErrors = [];
+  if (new Set(workIds).size !== workIds.length) configErrors.push('config/news-works.json: work ids must be unique');
+  for (const work of workConfig.works) {
+    if (!work || typeof work.id !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(work.id)) {
+      configErrors.push('config/news-works.json: each work needs a valid fixed id');
+    }
+    if (!work || typeof work.name !== 'string' || !work.name.trim()) {
+      configErrors.push(`config/news-works.json: work "${work?.id || 'unknown'}" needs a display name`);
+    }
+  }
   const files = (await readdir(path.join(rootDir, 'content/news'))).filter(file => file.endsWith('.md')).sort();
   const articles = [];
   const parseErrors = [];
@@ -128,7 +148,8 @@ export async function loadNewsContent(rootDir) {
   return {
     articles,
     sites: siteConfig.sites,
-    errors: [...parseErrors, ...validateArticles(articles, siteConfig.sites)]
+    works: workConfig.works,
+    errors: [...configErrors, ...parseErrors, ...validateArticles(articles, siteConfig.sites, workIds)]
   };
 }
 
@@ -152,6 +173,7 @@ export function serializeArticle(article) {
     external: Boolean(article.externalUrl),
     featured: article.featured,
     sites: article.sites,
+    works: article.works,
     ...(article.thumbnail ? { thumbnail: article.thumbnail } : {}),
     ...(article.createdAt ? { createdAt: article.createdAt } : {}),
     ...(article.updatedAt ? { updatedAt: article.updatedAt } : {})
@@ -163,5 +185,19 @@ export function buildFeed(articles, site) {
     schemaVersion: 1,
     site,
     articles: publicArticles(articles, site === 'all' ? undefined : site).map(serializeArticle)
+  };
+}
+
+export function buildWorkFeed(articles, work) {
+  return {
+    schemaVersion: 1,
+    work: {
+      id: work.id,
+      name: work.name
+    },
+    articles: articles
+      .filter(article => article.published && article.works.includes(work.id))
+      .sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id))
+      .map(serializeArticle)
   };
 }
