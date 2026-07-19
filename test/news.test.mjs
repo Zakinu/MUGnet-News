@@ -70,6 +70,14 @@ test('missing, duplicate and unknown work ids are rejected', () => {
   assert.match(unknownErrors.join('\n'), /undefined work/);
 });
 
+test('work feed generation fails explicitly when works is missing', () => {
+  const article = parseNewsMarkdown(source, '2026-07-20-example.md');
+  assert.throws(
+    () => buildWorkFeed([{ ...article, works: undefined }], { id: 'journey-to-die', name: 'Journey to die' }),
+    /2026-07-20-example\.md: cannot build work feed: "works" must be an array/
+  );
+});
+
 test('RSS escapes XML, normalizes URLs and matches JSON article ids', () => {
   const article = parseNewsMarkdown(source, '2026-07-20-example.md');
   const serialized = buildFeed([article], 'all').articles;

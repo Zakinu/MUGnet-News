@@ -189,6 +189,13 @@ export function buildFeed(articles, site) {
 }
 
 export function buildWorkFeed(articles, work) {
+  for (const article of articles) {
+    if (!Array.isArray(article.works)) {
+      const label = article.filename || article.id || 'unknown';
+      throw new Error(`${label}: cannot build work feed: "works" must be an array`);
+    }
+  }
+
   return {
     schemaVersion: 1,
     work: {
@@ -196,7 +203,7 @@ export function buildWorkFeed(articles, work) {
       name: work.name
     },
     articles: articles
-      .filter(article => article.published && article.works?.includes(work.id))
+      .filter(article => article.published && article.works.includes(work.id))
       .sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id))
       .map(serializeArticle)
   };
