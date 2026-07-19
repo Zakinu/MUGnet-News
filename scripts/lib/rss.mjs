@@ -32,15 +32,15 @@ export function buildRssFeed({ title, description, link, feedUrl, articles, site
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
     '  <channel>',
-    `    <title>${escapeXml(title)}</title>`,
-    `    <description>${escapeXml(description)}</description>`,
-    `    <link>${escapeXml(link)}</link>`,
-    `    <atom:link href="${escapeXml(feedUrl)}" rel="self" type="application/rss+xml" />`,
-    items,
+    '    <title>' + escapeXml(title) + '</title>',
+    '    <description>' + escapeXml(description) + '</description>',
+    '    <link>' + escapeXml(link) + '</link>',
+    '    <atom:link href="' + escapeXml(feedUrl) + '" rel="self" type="application/rss+xml" />',
+    ...(items ? [items] : []),
     '  </channel>',
     '</rss>',
     ''
-  ].filter((line, index) => line || index === 0).join('\n');
+  ].join('\n');
 }
 
 export function rssGuids(xml) {
