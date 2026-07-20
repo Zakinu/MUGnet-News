@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { normalizeSearchText, matchesNewsItem } from '../static/assets/news-search.js';
+import { buildSearchUrl, normalizeSearchText, matchesNewsItem } from '../static/assets/news-search.js';
 import { loadNewsContent } from '../scripts/lib/news.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -39,6 +39,16 @@ test('search matching combines keyword and taxonomy filters', () => {
   assert.equal(matchesNewsItem(record, { query: '梵天', year: '2026', category: 'イベント', site: 'mugnet', work: 'bonten' }), true);
   assert.equal(matchesNewsItem(record, { query: 'journey', year: '', category: '', site: '', work: '' }), false);
   assert.equal(matchesNewsItem(record, { query: '', year: '', category: '', site: '', work: 'journey-to-die' }), false);
+});
+
+test('search URL generation preserves the current path and hash', () => {
+  assert.equal(
+    buildSearchUrl(
+      { query: '梵天 世界', year: '2026', category: '', site: 'mugnet', work: '' },
+      { pathname: '/MUGnet-News/news/', hash: '#results' }
+    ),
+    '/MUGnet-News/news/?q=%E6%A2%B5%E5%A4%A9+%E4%B8%96%E7%95%8C&year=2026&site=mugnet#results'
+  );
 });
 
 test('generated pages expose the branded archive shell', async () => {
