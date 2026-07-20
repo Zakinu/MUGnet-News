@@ -225,7 +225,9 @@ function renderArticlePage(article) {
     publisher: { '@type': 'Organization', name: 'MUGnet', url: 'https://mugnet.jp/' },
     mainEntityOfPage: { '@type': 'WebPage', '@id': canonical }, url: canonical
   };
-  const siteItems = article.sites.map(site => `<li>${escapeHtml(site)}</li>`).join('');
+  const siteItems = article.sites
+    .map(site => `<li>${escapeHtml(feedConfig.sites[site]?.title || site)}</li>`)
+    .join('');
   const workItems = article.works.map(id => {
     const work = works.find(candidate => candidate.id === id);
     return `<li><a href="${escapeHtml(absoluteUrl(`works/${id}/`))}">${escapeHtml(work?.name || id)}</a></li>`;

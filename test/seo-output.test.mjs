@@ -6,11 +6,12 @@ import os from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { loadNewsContent } from '../scripts/lib/news.mjs';
+import { normalizePublicBaseUrl } from '../scripts/lib/url.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const publicDir = path.join(root, 'public');
 const config = JSON.parse(await readFile(path.join(root, 'config/feed-channels.json'), 'utf8'));
-const baseUrl = new URL(config.publicBaseUrl.endsWith('/') ? config.publicBaseUrl : `${config.publicBaseUrl}/`);
+const baseUrl = normalizePublicBaseUrl(config.publicBaseUrl);
 const loaded = await loadNewsContent(root);
 const published = loaded.articles.filter(article => article.published);
 const publishedIds = new Set(published.map(article => article.id));
@@ -84,6 +85,15 @@ test('article canonical URLs and JSON-LD are valid absolute URLs under the GitHu
       assert.doesNotThrow(() => new URL(value));
       assert.match(value, /^https:\/\//);
       assert.match(value, /\/MUGnet-News\//);
+    }
+  }
+});
+
+test('article pages show configured site titles instead of raw site ids', async () => {
+  for (const article of published) {
+    const html = await readFile(path.join(publicDir, 'news', article.id, 'index.html'), 'utf8');
+    for (const site of article.sites) {
+      assert.match(html, new RegExp(`<li>${config.sites[site]?.title || site}</li>`));
     }
   }
 });
