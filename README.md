@@ -104,7 +104,7 @@ updatedAt: 2026-07-20
 ---
 ```
 
-`sites`は掲載先、`works`は関連作品です。掲載先IDは[`config/news-sites.json`](config/news-sites.json)、記事ページで使う表示名は[`config/feed-channels.json`](config/feed-channels.json)、作品IDと表示名は[`config/news-works.json`](config/news-works.json)で管理します。未知の掲載先IDは検証で拒否され、表示名がない場合だけIDへフォールバックします。作品非依存の記事は`works: []`にします。
+`sites`は掲載先、`works`は関連作品です。掲載先IDは[`config/news-sites.json`](config/news-sites.json)、記事ページで使う表示名（`title`）は[`config/feed-channels.json`](config/feed-channels.json)、作品IDと表示名は[`config/news-works.json`](config/news-works.json)で管理します。未知の掲載先IDは検証で拒否され、表示名がない場合だけIDへフォールバックします。作品非依存の記事は`works: []`にします。
 
 Press記事で`includeInNews: true`を指定する場合は、同じIDの公開News記事が必要です。`createdAt`と`updatedAt`は実在する`YYYY-MM-DD`形式とし、`updatedAt`を`createdAt`より前にはできません。
 
