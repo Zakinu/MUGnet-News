@@ -13,22 +13,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          show-progress: false
       - uses: actions/setup-node@v7
         with:
           node-version: 24
           package-manager-cache: false
       - run: npm ci
-      - name: Run validation
-        shell: bash
-        run: |
-          set +e
-          npm run check > "$RUNNER_TEMP/check.log" 2>&1
-          status=$?
-          if [ "$status" -ne 0 ]; then
-            tail -n 160 "$RUNNER_TEMP/check.log"
-            exit "$status"
-          fi
-          cat "$RUNNER_TEMP/check.log"
+      - name: Build generated site
+        run: npm run build
+      - name: Test news model
+        run: node --test test/news.test.mjs
+      - name: Test Press model
+        run: node --test test/press.test.mjs
+      - name: Test JSON Schema
+        run: node --test test/schema.test.mjs
+      - name: Test SEO output
+        run: node --test test/seo-output.test.mjs
+      - name: Test branding and search
+        run: node --test test/brand-search.test.mjs
       - run: git diff --check
       - name: Upload generated site preview
         uses: actions/upload-artifact@v4
