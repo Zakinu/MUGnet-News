@@ -41,6 +41,22 @@ https://zakinu.github.io/MUGnet-News/news/<記事ID>/
 - Journey to die: https://zakinu.github.io/MUGnet-News/data/press/works/journey-to-die.json
 - 梵天世界の壊し方: https://zakinu.github.io/MUGnet-News/data/press/works/bonten.json
 
+## JSON Schema・互換性
+
+公開JSONはJSON Schema Draft 2020-12で検証できます。
+
+- Newsフィード: https://zakinu.github.io/MUGnet-News/schema/news-feed.schema.json
+- News記事: https://zakinu.github.io/MUGnet-News/schema/news-article.schema.json
+- Pressフィード: https://zakinu.github.io/MUGnet-News/schema/press-feed.schema.json
+- Press項目: https://zakinu.github.io/MUGnet-News/schema/press-entry.schema.json
+
+リポジトリ内の正本は[`schema/`](schema/)です。`public/schema/`は公開用コピーで、テストにより正本との差異を拒否します。
+
+- 互換性ポリシー: [`docs/versioning.md`](docs/versioning.md)
+- 変更履歴: [`CHANGELOG.md`](CHANGELOG.md)
+
+現在の公開フィードは`schemaVersion: 1`です。利用側は未知のフィールドを無視し、任意フィールドが存在することを前提にせず、未対応の`schemaVersion`を既知の構造として処理しないでください。フィード本体への`$schema`フィールド追加は現時点では行っていません。
+
 ## RSS
 
 - 全ニュース: https://zakinu.github.io/MUGnet-News/feed.xml
@@ -139,6 +155,7 @@ git switch main
 git pull --ff-only
 git switch -c news/2026-07-20-example
 
+npm ci
 npm run add -- \
   --title "お知らせのタイトル" \
   --slug example \
@@ -161,13 +178,14 @@ gh pr create --draft --fill
 ## 検証
 
 ```bash
+npm ci
 npm run build
 npm run check
 npm test
 git diff --check
 ```
 
-検証対象には必須項目、日付と更新順、ID重複、掲載先・作品ID、URL安全性、生HTML、`includeInNews`の対応、JSON/RSSの整合、静的HTML、canonical、JSON-LD、sitemap、下書き除外、`/MUGnet-News/`の保持が含まれます。
+検証対象には必須項目、日付と更新順、ID重複、掲載先・作品ID、URL安全性、生HTML、`includeInNews`の対応、JSON/RSSの整合、JSON Schema、静的HTML、canonical、JSON-LD、sitemap、下書き除外、`/MUGnet-News/`の保持が含まれます。
 
 `npm run check`は、削除・改名後に残った生成対象外のJSON、RSS、記事HTMLもエラーにします。通常の`npm run build`は、生成管理ディレクトリ内の不要ファイルだけを安全に削除します。
 
