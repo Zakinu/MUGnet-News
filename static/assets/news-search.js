@@ -16,6 +16,21 @@ export function matchesNewsItem(record, filters) {
   return true;
 }
 
+export function buildSearchUrl(filters, currentLocation) {
+  const params = new URLSearchParams();
+  for (const [key, value] of Object.entries({
+    q: filters.query,
+    year: filters.year,
+    category: filters.category,
+    site: filters.site,
+    work: filters.work
+  })) {
+    if (value) params.set(key, value);
+  }
+  const query = params.toString();
+  return `${currentLocation.pathname}${query ? `?${query}` : ''}${currentLocation.hash || ''}`;
+}
+
 function valuesFromForm(form) {
   const data = new FormData(form);
   return {
@@ -48,13 +63,17 @@ function applyUrlState(form) {
   }
 }
 
+let updateUrlTimeout;
 function updateUrl(filters) {
-  const params = new URLSearchParams();
-  for (const [key, value] of Object.entries({ q: filters.query, year: filters.year, category: filters.category, site: filters.site, work: filters.work })) {
-    if (value) params.set(key, value);
-  }
-  const query = params.toString();
-  history.replaceState(null, '', `${location.pathname}${query ? `?${query}` : ''}${location.hash}`);
+  const nextUrl = buildSearchUrl(filters, location);
+  clearTimeout(updateUrlTimeout);
+  updateUrlTimeout = setTimeout(() => {
+    try {
+      history.replaceState(null, '', nextUrl);
+    } catch (error) {
+      console.warn('MUGnet News: failed to update the search URL.', error);
+    }
+  }, 250);
 }
 
 function initializeSearch(root) {
