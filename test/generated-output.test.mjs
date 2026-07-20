@@ -34,6 +34,9 @@ test('generated public output is not tracked by Git', () => {
     cwd: root,
     encoding: 'utf8'
   });
+  if (result.error) {
+    assert.fail(`Failed to execute git: ${result.error.message}`);
+  }
   assert.equal(result.status, 0, result.stderr);
   assert.equal(result.stdout.trim(), '', 'public/ must contain generated, untracked output only');
 });
