@@ -16,7 +16,7 @@ if (loaded.errors.length) {
 
 const published = publicArticles(loaded.articles);
 const workById = new Map(loaded.works.map(work => [work.id, work]));
-const siteTitle = site => feedConfig.sites[site]?.title || site;
+const siteTitle = site => feedConfig.sites?.[site]?.title || site;
 
 const listPages = new Map([
   [path.join(publicDir, 'index.html'), { articles: published.slice(0, 10), searchable: false, home: true }],
@@ -98,14 +98,15 @@ function replaceHeader(html) {
     </nav>
   </div>
 </header>`;
-  return html.replace(/<header>[\s\S]*?<\/header>/, header);
+  return html.replace(/<header\b[^>]*>[\s\S]*?<\/header>/i, header);
 }
 
 function replaceArticleList(html, articles, searchable) {
-  if (!html.includes('<ol class="article-list">')) return html;
+  const listPattern = /<ol\b[^>]*\bclass=(["'])[^"']*\barticle-list\b[^"']*\1[^>]*>[\s\S]*?<\/ol>/i;
+  if (!listPattern.test(html)) return html;
   const controls = searchable ? renderSearchControls(articles) : '';
   const list = renderArticleCards(articles, searchable);
-  return html.replace(/<ol class="article-list">[\s\S]*?<\/ol>/, `${controls}${list}`);
+  return html.replace(listPattern, `${controls}${list}`);
 }
 
 function renderSearchControls(articles) {
@@ -153,9 +154,9 @@ function addSearchScript(html) {
 
 function enhanceHome(html) {
   return html
-    .replace('<section><h1>MUGnet News</h1>', '<section class="hero"><p class="eyebrow">MUGnet Official Archive</p><h1>MUGnet News</h1>')
-    .replace('<section><h2>一覧</h2>', '<section id="works"><h2>作品・掲載情報</h2>')
-    .replace(/<section><h2>データフィード<\/h2>/, '<section class="developer-area"><p class="eyebrow">For Developers</p><h2>データフィード</h2>');
+    .replace(/<section\b[^>]*>\s*<h1>MUGnet News<\/h1>/i, '<section class="hero"><p class="eyebrow">MUGnet Official Archive</p><h1>MUGnet News</h1>')
+    .replace(/<section\b[^>]*>\s*<h2>一覧<\/h2>/i, '<section id="works"><h2>作品・掲載情報</h2>')
+    .replace(/<section\b[^>]*>\s*<h2>データフィード<\/h2>/i, '<section class="developer-area"><p class="eyebrow">For Developers</p><h2>データフィード</h2>');
 }
 
 function uniqueSorted(values, compare) {
