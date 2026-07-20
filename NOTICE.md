@@ -11,7 +11,7 @@ MUGnet Newsは、異なる権利条件を持つコード、記事、フィード
 | ソフトウェアコード | `scripts/`、`test/`、`examples/`、ビルド・検証用コード | [`LICENSE`](LICENSE)のMIT License |
 | フィード情報 | タイトル、概要、日付、カテゴリ、URL、掲載先、関連作品、サムネイルURL | [`DATA_USAGE.md`](DATA_USAGE.md) |
 | 記事本文 | `content/news/`、`content/press/`および生成された記事本文 | [`CONTENT_LICENSE.md`](CONTENT_LICENSE.md) |
-| 画像・ロゴ等 | `public/assets/`、サークルカット、作品画像、ロゴ、写真 | [`ASSET_POLICY.md`](ASSET_POLICY.md) |
+| 画像・ロゴ等 | `static/assets/`、サークルカット、作品画像、ロゴ、写真 | [`ASSET_POLICY.md`](ASSET_POLICY.md) |
 | 第三者素材 | 外部引用、第三者ロゴ、イベント・媒体・サービス関連素材 | 各権利者および各利用条件 |
 
 ## 生成物の扱い
