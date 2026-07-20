@@ -30,8 +30,14 @@ jobs:
         run: node --test test/schema.test.mjs
       - name: Test SEO output
         run: node --test test/seo-output.test.mjs
-      - name: Test branding and search
-        run: node --test test/brand-search.test.mjs
+      - name: Test search logic
+        run: node --test --test-name-pattern="search normalization|search matching" test/brand-search.test.mjs
+      - name: Test generated branding
+        run: node --test --test-name-pattern="generated pages expose branding" test/brand-search.test.mjs
+      - name: Test work-page search
+        run: node --test --test-name-pattern="work pages receive" test/brand-search.test.mjs
+      - name: Test copied brand assets
+        run: node --test --test-name-pattern="brand and search assets" test/brand-search.test.mjs
       - run: git diff --check
       - name: Upload generated site preview
         uses: actions/upload-artifact@v4
