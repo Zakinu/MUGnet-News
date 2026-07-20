@@ -220,6 +220,24 @@
       "updatedAt": "2025-12-31"
     },
     {
+      "id": "2025-12-23-booth-price-revision",
+      "date": "2025-12-23",
+      "title": "公式BOOTH通販価格改定のお知らせ",
+      "summary": "2026年1月1日から、公式BOOTHで取り扱うパッケージ版・グッズの通販価格を従来定価の20%上乗せへ改定します。ダウンロード版とイベント頒布価格は据え置きです。",
+      "body": "2026年1月1日から、公式BOOTHで取り扱うパッケージ版およびグッズの通販価格を、従来定価の20%上乗せへ改定します。ダウンロード版とイベント会場での頒布価格は従来通りです。",
+      "category": "お知らせ",
+      "linkUrl": "https://www.value-press.com/pressrelease/367202",
+      "linkText": "価格改定のお知らせを見る",
+      "external": true,
+      "featured": false,
+      "sites": [
+        "mugnet"
+      ],
+      "works": [],
+      "createdAt": "2025-12-23",
+      "updatedAt": "2025-12-23"
+    },
+    {
       "id": "2025-11-01-news-66dd558",
       "date": "2025-11-01",
       "title": "カクヨムにて「梵天世界の壊し方」を連載中",
@@ -395,6 +413,26 @@
       ],
       "createdAt": "2025-05-28",
       "updatedAt": "2025-05-28"
+    },
+    {
+      "id": "2025-05-25-dreamscape-journal-20-mugnet",
+      "date": "2025-05-25",
+      "title": "DREAMSCAPE JOURNAL#20にMUGnetのインタビューが掲載されました",
+      "summary": "DREAMSCAPE JOURNALに、『Journey to die』を手がけたMUGnetのZakinuと本野兎へのインタビューが掲載されました。",
+      "body": "DREAMSCAPE JOURNAL#20に、『Journey to die』を手がけたMUGnetのZakinuと本野兎へのインタビューが掲載されました。サークル設立の経緯、制作体制、プロジェクト管理、作品へのこだわりなどについてお話ししています。",
+      "category": "メディア",
+      "linkUrl": "https://note.com/dreamscape2024/n/n4bc0d703b52c",
+      "linkText": "インタビューを読む",
+      "external": true,
+      "featured": false,
+      "sites": [
+        "mugnet"
+      ],
+      "works": [
+        "journey-to-die"
+      ],
+      "createdAt": "2025-05-25",
+      "updatedAt": "2025-05-25"
     },
     {
       "id": "2025-05-24-dreamscape-3-a02d17a",
