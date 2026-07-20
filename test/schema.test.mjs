@@ -67,11 +67,11 @@ test('published schema copies match the repository schemas', async () => {
       published = await readFile(path.join(publicSchemaDirectory, name), 'utf8');
     } catch (error) {
       if (error?.code === 'ENOENT') {
-        assert.fail(`Published schema copy is missing: public/schema/${name}. Restore it from schema/${name} before testing.`);
+        assert.fail(`Generated schema copy is missing: public/schema/${name}. Run "npm run build" before testing.`);
       }
       throw error;
     }
-    assert.equal(published, source, `${name} differs from its public copy`);
+    assert.equal(published, source, `${name} differs from its generated public copy`);
   }
 });
 
