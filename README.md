@@ -106,6 +106,12 @@ updatedAt: 2026-07-20
 
 `sites`は掲載先、`works`は関連作品です。掲載先IDは[`config/news-sites.json`](config/news-sites.json)、記事ページで使う表示名（`title`）は[`config/feed-channels.json`](config/feed-channels.json)、作品IDと表示名は[`config/news-works.json`](config/news-works.json)で管理します。未知の掲載先IDは検証で拒否され、表示名がない場合だけIDへフォールバックします。作品非依存の記事は`works: []`にします。
 
+記事画像は`public/assets/news/<記事ID>/`へ配置し、`thumbnail`にはGitHub Pages上の絶対URLを指定します。これにより別ドメインの作品サイトからも同じ画像を利用できます。`thumbnail`がある記事ページでは本文画像、OGP、Twitter Cardにも同じURLを使用します。第三者の個人情報、肖像、権利未確認の画像は公開リポジトリへ移管しません。
+
+```yaml
+thumbnail: "https://zakinu.github.io/MUGnet-News/assets/news/<記事ID>/thumbnail.jpg"
+```
+
 Press記事で`includeInNews: true`を指定する場合は、同じIDの公開News記事が必要です。`createdAt`と`updatedAt`は実在する`YYYY-MM-DD`形式とし、`updatedAt`を`createdAt`より前にはできません。
 
 このリポジトリは公開されています。未発表情報、認証情報、個人情報をcommitしないでください。`published: false`でもGitHub上のファイル自体は公開されるため、下書きは非公開の場所で管理します。

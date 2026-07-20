@@ -153,7 +153,7 @@ function markdownToHtml(markdown) {
     .map(block => `<p>${block.split('\n').map(markdownInline).join('<br>')}</p>`).join('\n');
 }
 
-function pageShell({ title, description, relativeUrl, body, jsonLd = null, rssRelative = 'feed.xml' }) {
+function pageShell({ title, description, relativeUrl, body, jsonLd = null, rssRelative = 'feed.xml', imageUrl = '' }) {
   const canonical = absoluteUrl(relativeUrl);
   const fullTitle = title === 'MUGnet News' ? title : `${title} | MUGnet News`;
   return `<!doctype html>
@@ -170,10 +170,12 @@ function pageShell({ title, description, relativeUrl, body, jsonLd = null, rssRe
   <meta property="og:site_name" content="MUGnet News">
   <meta property="og:title" content="${escapeHtml(fullTitle)}">
   <meta property="og:description" content="${escapeHtml(description)}">
-  <meta property="og:url" content="${escapeHtml(canonical)}">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:url" content="${escapeHtml(canonical)}">${imageUrl ? `
+  <meta property="og:image" content="${escapeHtml(imageUrl)}">` : ''}
+  <meta name="twitter:card" content="${imageUrl ? 'summary_large_image' : 'summary'}">
   <meta name="twitter:title" content="${escapeHtml(fullTitle)}">
-  <meta name="twitter:description" content="${escapeHtml(description)}">${jsonLd ? `
+  <meta name="twitter:description" content="${escapeHtml(description)}">${imageUrl ? `
+  <meta name="twitter:image" content="${escapeHtml(imageUrl)}">` : ''}${jsonLd ? `
   <script type="application/ld+json">${safeJson(jsonLd)}</script>` : ''}
   <style>${siteCss()}</style>
 </head>
@@ -225,6 +227,7 @@ function renderArticlePage(article) {
     publisher: { '@type': 'Organization', name: 'MUGnet', url: 'https://mugnet.jp/' },
     mainEntityOfPage: { '@type': 'WebPage', '@id': canonical }, url: canonical
   };
+  if (article.thumbnail) jsonLd.image = [article.thumbnail];
   const siteItems = article.sites
     .map(site => `<li>${escapeHtml(feedConfig.sites[site]?.title || site)}</li>`)
     .join('');
@@ -234,8 +237,8 @@ function renderArticlePage(article) {
   }).join('');
   const linkUrl = article.externalUrl || article.url;
   return pageShell({
-    title: article.title, description: article.summary, relativeUrl, jsonLd,
-    body: `<article><h1>${escapeHtml(article.title)}</h1><p class="dates"><span>公開日: <time datetime="${escapeHtml(article.date)}">${escapeHtml(article.date)}</time></span> <span>更新日: <time datetime="${escapeHtml(modified)}">${escapeHtml(modified)}</time></span></p><p class="summary">${escapeHtml(article.summary)}</p><div class="article-body">${markdownToHtml(article.body)}</div>${linkUrl ? `<p><a class="external" href="${escapeHtml(new URL(linkUrl, feedConfig.sites[article.sites[0]]?.link || publicBaseUrl).href)}" rel="noopener noreferrer">${escapeHtml(article.linkText || '公式情報を見る')}</a></p>` : ''}<dl><dt>Sites</dt><dd><ul>${siteItems}</ul></dd><dt>Works</dt><dd>${workItems ? `<ul>${workItems}</ul>` : '—'}</dd></dl></article>`
+    title: article.title, description: article.summary, relativeUrl, jsonLd, imageUrl: article.thumbnail,
+    body: `<article><h1>${escapeHtml(article.title)}</h1><p class="dates"><span>公開日: <time datetime="${escapeHtml(article.date)}">${escapeHtml(article.date)}</time></span> <span>更新日: <time datetime="${escapeHtml(modified)}">${escapeHtml(modified)}</time></span></p>${article.thumbnail ? `<figure style="margin:1.5rem 0;max-width:48rem"><img src="${escapeHtml(article.thumbnail)}" alt="${escapeHtml(article.title)}" fetchpriority="high" decoding="async" style="display:block;width:100%;height:auto;border-radius:.4rem"></figure>` : ''}<p class="summary">${escapeHtml(article.summary)}</p><div class="article-body">${markdownToHtml(article.body)}</div>${linkUrl ? `<p><a class="external" href="${escapeHtml(new URL(linkUrl, feedConfig.sites[article.sites[0]]?.link || publicBaseUrl).href)}" rel="noopener noreferrer">${escapeHtml(article.linkText || '公式情報を見る')}</a></p>` : ''}<dl><dt>Sites</dt><dd><ul>${siteItems}</ul></dd><dt>Works</dt><dd>${workItems ? `<ul>${workItems}</ul>` : '—'}</dd></dl></article>`
   });
 }
 

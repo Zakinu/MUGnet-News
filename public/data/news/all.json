@@ -727,7 +727,7 @@
       "date": "2024-11-09",
       "title": "C105にて 西地区 \"く\"ブロック－45a(西２ホール) に配置されることが決定しました。",
       "summary": "サークルカット",
-      "body": "[サークルカット](https://pbs.twimg.com/media/GcgzufJaMAEzvcc?format=jpg&name=medium)",
+      "body": "[サークルカット](https://zakinu.github.io/MUGnet-News/assets/news/2024-11-09-c105-45a-2-074e5fb/circle-cut.jpg)",
       "category": "イベント",
       "linkUrl": "",
       "linkText": "",
@@ -739,8 +739,9 @@
       "works": [
         "journey-to-die"
       ],
+      "thumbnail": "https://zakinu.github.io/MUGnet-News/assets/news/2024-11-09-c105-45a-2-074e5fb/circle-cut.jpg",
       "createdAt": "2024-11-09",
-      "updatedAt": "2024-11-09"
+      "updatedAt": "2026-07-20"
     },
     {
       "id": "2024-10-20-journey-to-die-version-39d240b",
@@ -816,9 +817,11 @@
       "sites": [
         "mugnet"
       ],
-      "works": [],
+      "works": [
+        "journey-to-die"
+      ],
       "createdAt": "2024-08-22",
-      "updatedAt": "2024-08-22"
+      "updatedAt": "2026-07-20"
     }
   ]
 }
