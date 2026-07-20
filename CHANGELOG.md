@@ -4,7 +4,16 @@ MUGnet Newsの公開形式、生成基盤、互換性および主要な配信機
 
 ## Unreleased
 
-現時点で予告済みの破壊的変更はありません。
+### Changed
+
+- 生成済みHTML、JSON、RSS、sitemap等をGit管理から外し、GitHub ActionsでクリーンビルドしてPagesへ直接デプロイ
+- 手動管理する画像、Search Console認証ファイル等を`static/`へ分離
+- Pull Requestの検証結果として生成済み`public/`をActions Artifactへ保存
+
+### Compatibility
+
+- 公開URL、JSON形式、RSS形式、記事IDは変更しません。
+- Gitリポジトリ内の生成物配置だけを変更します。
 
 ## schemaVersion 1 — 2026-07-20
 
