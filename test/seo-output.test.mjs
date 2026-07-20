@@ -86,6 +86,14 @@ test('article canonical URLs and JSON-LD are valid absolute URLs under the GitHu
       assert.match(value, /^https:\/\//);
       assert.match(value, /\/MUGnet-News\//);
     }
+    if (article.thumbnail) {
+      assert.match(article.thumbnail, /^https:\/\//);
+      assert.match(article.thumbnail, /\/MUGnet-News\//);
+      assert.ok(html.includes(`<meta property="og:image" content="${article.thumbnail}">`));
+      assert.ok(html.includes(`<meta name="twitter:image" content="${article.thumbnail}">`));
+      assert.ok(html.includes(`<img src="${article.thumbnail}"`));
+      assert.equal(await exists(publicPathForUrl(article.thumbnail)), true, `thumbnail does not exist: ${article.thumbnail}`);
+    }
   }
 });
 
