@@ -5,7 +5,7 @@ import { loadPressContent } from './lib/press.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const { articles, sites, works, errors: newsErrors } = await loadNewsContent(root);
-const { entries, errors: pressErrors } = await loadPressContent(root, works);
+const { entries, errors: pressErrors } = await loadPressContent(root, works, articles);
 const errors = [...newsErrors, ...pressErrors];
 
 if (errors.length) {

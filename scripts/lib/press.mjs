@@ -1,6 +1,6 @@
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
-import { isSafeUrl, isValidDate } from './news.mjs';
+import { isSafeUrl, isValidDate, validateLifecycleDates } from './news.mjs';
 
 const ID_PATTERN = /^\d{4}-\d{2}-\d{2}-[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const TYPES = new Set(['press-release', 'interview', 'media-coverage']);
@@ -43,7 +43,7 @@ export function parsePressMarkdown(source, filename = 'unknown.md') {
   return { ...metadata, body: normalized.slice(end + 5).trim(), filename };
 }
 
-export function validatePressEntries(entries, allowedWorks) {
+export function validatePressEntries(entries, allowedWorks, newsArticles) {
   const errors = [];
   const ids = new Map();
   const required = ['id', 'type', 'date', 'title', 'publication', 'summary', 'externalUrl', 'works', 'includeInNews', 'published'];
@@ -57,6 +57,7 @@ export function validatePressEntries(entries, allowedWorks) {
     if (ids.has(entry.id)) errors.push(`${label}: duplicate id (also in ${ids.get(entry.id)})`); else ids.set(entry.id, label);
     if (!TYPES.has(entry.type)) errors.push(`${label}: invalid type "${entry.type}"`);
     if (!isValidDate(entry.date)) errors.push(`${label}: invalid date "${entry.date}"`);
+    errors.push(...validateLifecycleDates(entry, label));
     if (!isSafeUrl(entry.externalUrl, { allowEmpty: false }) || !/^https?:/i.test(entry.externalUrl || '')) errors.push(`${label}: externalUrl must be a safe http or https URL`);
     if (!Array.isArray(entry.works)) errors.push(`${label}: works must be an array`);
     else {
@@ -64,6 +65,10 @@ export function validatePressEntries(entries, allowedWorks) {
       for (const work of entry.works) if (typeof work !== 'string' || !allowedWorks.includes(work)) errors.push(`${label}: undefined work "${work}"`);
     }
     if (typeof entry.includeInNews !== 'boolean') errors.push(`${label}: includeInNews must be true or false`);
+    if (entry.includeInNews === true && newsArticles) {
+      const matchingArticle = newsArticles.find(article => article.id === entry.id && article.published === true);
+      if (!matchingArticle) errors.push(`${label}: includeInNews requires a published news article with the same id`);
+    }
     if (entry.published !== true) errors.push(`${label}: drafts are not allowed in this public repository`);
     for (const field of ['title', 'publication', 'summary']) if (/<\/?[a-z][^>]*>/i.test(String(entry[field] || ''))) errors.push(`${label}: HTML is not allowed in ${field}`);
     if (/<\/?[a-z][^>]*>/i.test(entry.body || '')) errors.push(`${label}: raw HTML is not allowed in Markdown body`);
@@ -71,7 +76,7 @@ export function validatePressEntries(entries, allowedWorks) {
   return errors;
 }
 
-export async function loadPressContent(rootDir, works) {
+export async function loadPressContent(rootDir, works, newsArticles) {
   const directory = path.join(rootDir, 'content/press');
   let files = [];
   try { files = (await readdir(directory)).filter(file => file.endsWith('.md')).sort(); } catch {}
@@ -82,7 +87,7 @@ export async function loadPressContent(rootDir, works) {
     catch (error) { parseErrors.push(error.message); }
   }
   const workIds = works.map(work => work.id);
-  return { entries, errors: [...parseErrors, ...validatePressEntries(entries, workIds)] };
+  return { entries, errors: [...parseErrors, ...validatePressEntries(entries, workIds, newsArticles)] };
 }
 
 export function serializePressEntry(entry) {

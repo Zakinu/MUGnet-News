@@ -1,0 +1,18 @@
+# MUGnet News
+
+MUGnet Newsは、MUGnetと関連サイトが公開したニュース、作品情報、プレスリリースを収録する公式公開アーカイブです。記載内容はすべて公開情報です。
+
+## Main resources
+
+- Top page: https://zakinu.github.io/MUGnet-News/
+- All news JSON: https://zakinu.github.io/MUGnet-News/data/news/all.json
+- News RSS: https://zakinu.github.io/MUGnet-News/feed.xml
+- Press & Interview: https://zakinu.github.io/MUGnet-News/press/
+- Press JSON: https://zakinu.github.io/MUGnet-News/data/press/all.json
+- Press RSS: https://zakinu.github.io/MUGnet-News/press.xml
+- zakinu JSON: https://zakinu.github.io/MUGnet-News/data/news/zakinu.json
+- mugnet JSON: https://zakinu.github.io/MUGnet-News/data/news/mugnet.json
+- music JSON: https://zakinu.github.io/MUGnet-News/data/news/music.json
+- Journey to die JSON: https://zakinu.github.io/MUGnet-News/data/news/works/journey-to-die.json
+- 梵天世界の壊し方 JSON: https://zakinu.github.io/MUGnet-News/data/news/works/bonten.json
+- MUGnet official website: https://mugnet.jp/
