@@ -18,7 +18,17 @@ jobs:
           node-version: 24
           package-manager-cache: false
       - run: npm ci
-      - run: npm run check
+      - name: Run validation
+        shell: bash
+        run: |
+          set +e
+          npm run check > "$RUNNER_TEMP/check.log" 2>&1
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            tail -n 160 "$RUNNER_TEMP/check.log"
+            exit "$status"
+          fi
+          cat "$RUNNER_TEMP/check.log"
       - run: git diff --check
       - name: Upload generated site preview
         uses: actions/upload-artifact@v4
