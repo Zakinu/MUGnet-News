@@ -15,6 +15,15 @@ async function exists(file) {
   try { return (await stat(file)).isFile(); } catch { return false; }
 }
 
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
 test('search normalization handles full-width characters, case, and whitespace', () => {
   assert.equal(normalizeSearchText(' ＭＵＧｎｅｔ　 NEWS  '), 'mugnet news');
 });
@@ -32,15 +41,24 @@ test('search matching combines keyword and taxonomy filters', () => {
   assert.equal(matchesNewsItem(record, { query: '', year: '', category: '', site: '', work: 'journey-to-die' }), false);
 });
 
-test('generated pages expose branding without hiding static article content', async () => {
+test('generated pages expose the branded archive shell', async () => {
   const newsHtml = await readFile(path.join(publicDir, 'news', 'index.html'), 'utf8');
   assert.match(newsHtml, /公式ニュースアーカイブ/);
   assert.match(newsHtml, /assets\/news-mark\.svg/);
   assert.match(newsHtml, /assets\/site\.css/);
+});
+
+test('generated news list exposes progressive search controls', async () => {
+  const newsHtml = await readFile(path.join(publicDir, 'news', 'index.html'), 'utf8');
   assert.match(newsHtml, /data-news-search hidden/);
   assert.match(newsHtml, /type="module"[^>]+assets\/news-search\.js/);
+  assert.match(newsHtml, /data-news-item/);
+});
+
+test('generated news list keeps every article in static HTML', async () => {
+  const newsHtml = await readFile(path.join(publicDir, 'news', 'index.html'), 'utf8');
   for (const article of published) {
-    assert.ok(newsHtml.includes(article.title), `news list must contain static text for ${article.id}`);
+    assert.ok(newsHtml.includes(escapeHtml(article.title)), `news list must contain static text for ${article.id}`);
     assert.ok(newsHtml.includes(`data-year="${article.date.slice(0, 4)}"`));
   }
 });
