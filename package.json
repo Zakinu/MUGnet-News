@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "add": "node scripts/add-news.mjs",
-    "prebuild": "node scripts/validate-news.mjs",
+    "prebuild": "node scripts/validate-news.mjs && node scripts/prepare-public.mjs",
     "build": "node scripts/build-news.mjs",
-    "check": "node scripts/build-news.mjs --check && node --test",
+    "check": "npm test",
     "validate": "node scripts/validate-news.mjs",
+    "pretest": "npm run build",
     "test": "node --test"
   },
   "devDependencies": {
