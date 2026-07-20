@@ -37,3 +37,33 @@ test('work-scoped press feeds contain only matching entries', () => {
   assert.equal(buildPressFeed([entry], { id: 'bonten', name: '梵天世界の壊し方' }).entries.length, 1);
   assert.equal(buildPressFeed([entry], { id: 'journey-to-die', name: 'Journey to die' }).entries.length, 0);
 });
+
+test('includeInNews requires a published news article with the same id', () => {
+  const entry = { ...parsePressMarkdown(source, '2026-07-17-example-press.md'), includeInNews: true };
+  const matchingNews = { id: entry.id, published: true };
+  assert.deepEqual(validatePressEntries([entry], ['bonten'], [matchingNews]), []);
+
+  const missingErrors = validatePressEntries([entry], ['bonten'], []);
+  assert.match(missingErrors.join('\n'), /includeInNews.*published news article with the same id/i);
+
+  const draftErrors = validatePressEntries([entry], ['bonten'], [{ ...matchingNews, published: false }]);
+  assert.match(draftErrors.join('\n'), /includeInNews.*published news article with the same id/i);
+});
+
+test('press optional date metadata has strict types and chronology', () => {
+  const entry = parsePressMarkdown(source, '2026-07-17-example-press.md');
+  const invalidErrors = validatePressEntries([{
+    ...entry,
+    createdAt: 20260717,
+    updatedAt: 'tomorrow'
+  }], ['bonten']);
+  assert.match(invalidErrors.join('\n'), /createdAt must be .*valid YYYY-MM-DD date/);
+  assert.match(invalidErrors.join('\n'), /updatedAt must be .*valid YYYY-MM-DD date/);
+
+  const chronologyErrors = validatePressEntries([{
+    ...entry,
+    createdAt: '2026-07-18',
+    updatedAt: '2026-07-17'
+  }], ['bonten']);
+  assert.match(chronologyErrors.join('\n'), /updatedAt.*(before|earlier than).*createdAt/i);
+});

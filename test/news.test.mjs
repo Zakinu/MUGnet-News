@@ -4,6 +4,7 @@ import { buildFeed, buildWorkFeed, isSafeUrl, parseNewsMarkdown, publicArticles,
 import { formatLocalDate, parseArgs } from '../scripts/lib/cli.mjs';
 import { buildRssFeed, normalizeArticleUrl, rssGuids } from '../scripts/lib/rss.mjs';
 import { isSafeUrl as isSafeClientUrl } from '../examples/news-feed-client.js';
+import { normalizePublicBaseUrl } from '../scripts/lib/url.mjs';
 
 const source = `---
 id: 2026-07-20-example
@@ -70,6 +71,26 @@ test('missing, duplicate and unknown work ids are rejected', () => {
   assert.match(unknownErrors.join('\n'), /undefined work/);
 });
 
+test('linkText and optional date metadata have strict types and chronology', () => {
+  const article = parseNewsMarkdown(source, '2026-07-20-example.md');
+  const errors = validateArticles([{
+    ...article,
+    linkText: 123,
+    createdAt: 'July 20, 2026',
+    updatedAt: '2026-02-30'
+  }], ['zakinu', 'mugnet'], ['journey-to-die']);
+  assert.match(errors.join('\n'), /linkText must be a string/);
+  assert.match(errors.join('\n'), /createdAt must be .*valid YYYY-MM-DD date/);
+  assert.match(errors.join('\n'), /updatedAt must be .*valid YYYY-MM-DD date/);
+
+  const chronologyErrors = validateArticles([{
+    ...article,
+    createdAt: '2026-07-21',
+    updatedAt: '2026-07-20'
+  }], ['zakinu', 'mugnet'], ['journey-to-die']);
+  assert.match(chronologyErrors.join('\n'), /updatedAt.*(before|earlier than).*createdAt/i);
+});
+
 test('work feed generation fails explicitly when works is missing', () => {
   const article = parseNewsMarkdown(source, '2026-07-20-example.md');
   assert.throws(
@@ -111,6 +132,12 @@ test('local dates do not use the UTC calendar day', () => {
 test('client URL validation matches hash links accepted by feeds', () => {
   assert.equal(isSafeClientUrl('#section'), true);
   assert.equal(isSafeClientUrl('#invalid section'), false);
+});
+
+test('public base URLs gain a trailing slash without losing the GitHub Pages path', () => {
+  const baseUrl = normalizePublicBaseUrl('https://zakinu.github.io/MUGnet-News');
+  assert.equal(baseUrl.href, 'https://zakinu.github.io/MUGnet-News/');
+  assert.equal(new URL('feed.xml', baseUrl).href, 'https://zakinu.github.io/MUGnet-News/feed.xml');
 });
 
 test('site initializers ignore pages without a news container', async () => {

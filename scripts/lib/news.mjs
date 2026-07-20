@@ -49,6 +49,23 @@ export function isValidDate(value) {
   return !Number.isNaN(date.valueOf()) && date.toISOString().slice(0, 10) === value;
 }
 
+export function validateLifecycleDates(item, label) {
+  const errors = [];
+  for (const field of ['createdAt', 'updatedAt']) {
+    if (item[field] !== undefined && (typeof item[field] !== 'string' || !isValidDate(item[field]))) {
+      errors.push(`${label}: ${field} must be a valid YYYY-MM-DD date`);
+    }
+  }
+  if (
+    typeof item.createdAt === 'string' && isValidDate(item.createdAt)
+    && typeof item.updatedAt === 'string' && isValidDate(item.updatedAt)
+    && item.updatedAt < item.createdAt
+  ) {
+    errors.push(`${label}: updatedAt must not be earlier than createdAt`);
+  }
+  return errors;
+}
+
 export function isSafeUrl(value, { allowEmpty = true } = {}) {
   if (!value) return allowEmpty;
   if (typeof value !== 'string' || /[\u0000-\u001f\\]/.test(value)) return false;
@@ -80,6 +97,10 @@ export function validateArticles(articles, allowedSites, allowedWorks, { publicR
         errors.push(`${label}: ${field} must be a string`);
       }
     }
+    if (article.linkText !== undefined && typeof article.linkText !== 'string') {
+      errors.push(`${label}: linkText must be a string`);
+    }
+    errors.push(...validateLifecycleDates(article, label));
     if (!ID_PATTERN.test(String(article.id || ''))) errors.push(`${label}: invalid id`);
     if (article.filename && path.basename(article.filename, '.md') !== article.id) errors.push(`${label}: filename must match id`);
     if (ids.has(article.id)) errors.push(`${label}: duplicate id (also in ${ids.get(article.id)})`);
