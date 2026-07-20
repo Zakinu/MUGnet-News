@@ -22,7 +22,16 @@ async function readJson(file) {
 
 async function collectJsonFiles(directory) {
   const files = [];
-  for (const entry of await readdir(directory, { withFileTypes: true })) {
+  let entries;
+  try {
+    entries = await readdir(directory, { withFileTypes: true });
+  } catch (error) {
+    if (error?.code === 'ENOENT') {
+      throw new Error(`Generated JSON directory is missing: ${path.relative(root, directory)}. Run "npm run build" first.`);
+    }
+    throw error;
+  }
+  for (const entry of entries) {
     const file = path.join(directory, entry.name);
     if (entry.isDirectory()) files.push(...await collectJsonFiles(file));
     else if (entry.name.endsWith('.json')) files.push(file);
@@ -53,7 +62,15 @@ assert.ok(validatePressFeed, 'press feed schema must compile');
 test('published schema copies match the repository schemas', async () => {
   for (const name of schemaNames) {
     const source = await readFile(path.join(schemaDirectory, name), 'utf8');
-    const published = await readFile(path.join(publicSchemaDirectory, name), 'utf8');
+    let published;
+    try {
+      published = await readFile(path.join(publicSchemaDirectory, name), 'utf8');
+    } catch (error) {
+      if (error?.code === 'ENOENT') {
+        assert.fail(`Published schema copy is missing: public/schema/${name}. Restore it from schema/${name} before testing.`);
+      }
+      throw error;
+    }
     assert.equal(published, source, `${name} differs from its public copy`);
   }
 });
@@ -63,9 +80,9 @@ test('all generated news JSON conforms to the public schema', async () => {
   assert.ok(files.length > 0, 'expected at least one generated news feed');
   for (const file of files) {
     const data = await readJson(file);
-    assert.equal(
-      validateNewsFeed(data),
-      true,
+    const isValid = validateNewsFeed(data);
+    assert.ok(
+      isValid,
       `${path.relative(root, file)} failed schema validation:\n${formatValidationErrors(validateNewsFeed)}`
     );
   }
@@ -76,9 +93,9 @@ test('all generated Press & Interview JSON conforms to the public schema', async
   assert.ok(files.length > 0, 'expected at least one generated press feed');
   for (const file of files) {
     const data = await readJson(file);
-    assert.equal(
-      validatePressFeed(data),
-      true,
+    const isValid = validatePressFeed(data);
+    assert.ok(
+      isValid,
       `${path.relative(root, file)} failed schema validation:\n${formatValidationErrors(validatePressFeed)}`
     );
   }
@@ -91,6 +108,7 @@ test('schemaVersion 1 accepts unknown additive fields but rejects incompatible v
     futureField: 'ignored by compatible clients',
     articles: []
   };
-  assert.equal(validateNewsFeed(valid), true, formatValidationErrors(validateNewsFeed));
+  const isValid = validateNewsFeed(valid);
+  assert.ok(isValid, formatValidationErrors(validateNewsFeed));
   assert.equal(validateNewsFeed({ ...valid, schemaVersion: 2 }), false);
 });
