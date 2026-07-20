@@ -7,6 +7,7 @@
     "add": "node scripts/add-news.mjs",
     "prebuild": "node scripts/validate-news.mjs && node scripts/prepare-public.mjs",
     "build": "node scripts/build-news.mjs",
+    "postbuild": "node scripts/enhance-site.mjs",
     "check": "npm test",
     "validate": "node scripts/validate-news.mjs",
     "pretest": "npm run build",

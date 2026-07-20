@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>MUGnet News</title>
+  <rect width="64" height="64" rx="12" fill="#111111"/>
+  <path d="M14 44V20h7l11 14 11-14h7v24h-7V30L32 43 21 30v14z" fill="#ffffff"/>
+  <circle cx="51" cy="13" r="5" fill="#a51d2d"/>
+</svg>
