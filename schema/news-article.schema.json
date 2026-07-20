@@ -77,11 +77,24 @@
     },
     "createdAt": {
       "type": "string",
-      "format": "date"
+      "format": "date",
+      "description": "Date when the archive record was created."
     },
     "updatedAt": {
       "type": "string",
-      "format": "date"
+      "format": "date",
+      "deprecated": true,
+      "description": "Legacy general update date retained for backward compatibility."
+    },
+    "contentUpdatedAt": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when reader-visible content or material facts were last changed."
+    },
+    "metadataUpdatedAt": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when internal metadata, taxonomy, or asset references were last changed."
     }
   },
   "additionalProperties": true
