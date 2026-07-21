@@ -6,7 +6,8 @@ const ID_PATTERN = /^\d{4}-\d{2}-\d{2}-[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const TYPES = new Set(['press-release', 'interview', 'media-coverage']);
 const ALLOWED_FIELDS = new Set([
   'id', 'type', 'date', 'title', 'publication', 'summary', 'externalUrl',
-  'works', 'includeInNews', 'published', 'createdAt', 'updatedAt'
+  'works', 'includeInNews', 'published', 'createdAt', 'updatedAt',
+  'contentUpdatedAt', 'metadataUpdatedAt'
 ]);
 
 function parseScalar(raw) {
@@ -103,7 +104,9 @@ export function serializePressEntry(entry) {
     works: entry.works,
     includeInNews: entry.includeInNews,
     ...(entry.createdAt ? { createdAt: entry.createdAt } : {}),
-    ...(entry.updatedAt ? { updatedAt: entry.updatedAt } : {})
+    ...(entry.updatedAt ? { updatedAt: entry.updatedAt } : {}),
+    ...(entry.contentUpdatedAt ? { contentUpdatedAt: entry.contentUpdatedAt } : {}),
+    ...(entry.metadataUpdatedAt ? { metadataUpdatedAt: entry.metadataUpdatedAt } : {})
   };
 }
 

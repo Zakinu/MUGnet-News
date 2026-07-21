@@ -45,7 +45,7 @@ try {
   if (!baseSlug) throw new Error('日本語タイトルの場合は --slug に半角英数字とハイフンのIDを指定してください。');
   const id = `${date}-${baseSlug}`;
   const target = path.join(root, 'content/news', `${id}.md`);
-  const markdown = `---\nid: ${id}\ntitle: ${quoteYaml(title)}\ndate: ${date}\ncategory: ${quoteYaml(category)}\nsummary: ${quoteYaml(summary)}\nurl: ${quoteYaml(url)}\nexternalUrl: ${quoteYaml(externalUrl)}\nlinkText: ${quoteYaml(linkText)}\npublished: true\nfeatured: ${parseBoolean(args.featured, false)}\nsites: [${sites.join(', ')}]\nworks: [${works.join(', ')}]\ncreatedAt: ${today}\nupdatedAt: ${today}\n---\n\n${body}\n`;
+  const markdown = `---\nid: ${id}\ntitle: ${quoteYaml(title)}\ndate: ${date}\ncategory: ${quoteYaml(category)}\nsummary: ${quoteYaml(summary)}\nurl: ${quoteYaml(url)}\nexternalUrl: ${quoteYaml(externalUrl)}\nlinkText: ${quoteYaml(linkText)}\npublished: true\nfeatured: ${parseBoolean(args.featured, false)}\nsites: [${sites.join(', ')}]\nworks: [${works.join(', ')}]\ncreatedAt: ${today}\nupdatedAt: ${today}\ncontentUpdatedAt: ${today}\nmetadataUpdatedAt: ${today}\n---\n\n${body}\n`;
 
   await mkdir(path.dirname(target), { recursive: true });
   await writeFile(target, markdown, { encoding: 'utf8', flag: 'wx' });

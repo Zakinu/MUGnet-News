@@ -3,9 +3,11 @@ import path from 'node:path';
 
 const ID_PATTERN = /^\d{4}-\d{2}-\d{2}-[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+const LIFECYCLE_DATE_FIELDS = ['createdAt', 'updatedAt', 'contentUpdatedAt', 'metadataUpdatedAt'];
 const ALLOWED_FIELDS = new Set([
   'id', 'title', 'date', 'category', 'summary', 'url', 'externalUrl',
-  'linkText', 'published', 'featured', 'sites', 'works', 'thumbnail', 'createdAt', 'updatedAt'
+  'linkText', 'published', 'featured', 'sites', 'works', 'thumbnail',
+  ...LIFECYCLE_DATE_FIELDS
 ]);
 
 function parseScalar(raw) {
@@ -49,19 +51,25 @@ export function isValidDate(value) {
   return !Number.isNaN(date.valueOf()) && date.toISOString().slice(0, 10) === value;
 }
 
+export function contentModifiedDate(item) {
+  return item.contentUpdatedAt || item.updatedAt || item.createdAt || item.date;
+}
+
 export function validateLifecycleDates(item, label) {
   const errors = [];
-  for (const field of ['createdAt', 'updatedAt']) {
+  for (const field of LIFECYCLE_DATE_FIELDS) {
     if (item[field] !== undefined && (typeof item[field] !== 'string' || !isValidDate(item[field]))) {
       errors.push(`${label}: ${field} must be a valid YYYY-MM-DD date`);
     }
   }
-  if (
-    typeof item.createdAt === 'string' && isValidDate(item.createdAt)
-    && typeof item.updatedAt === 'string' && isValidDate(item.updatedAt)
-    && item.updatedAt < item.createdAt
-  ) {
-    errors.push(`${label}: updatedAt must not be earlier than createdAt`);
+  for (const field of ['updatedAt', 'contentUpdatedAt', 'metadataUpdatedAt']) {
+    if (
+      typeof item.createdAt === 'string' && isValidDate(item.createdAt)
+      && typeof item[field] === 'string' && isValidDate(item[field])
+      && item[field] < item.createdAt
+    ) {
+      errors.push(`${label}: ${field} must not be earlier than createdAt`);
+    }
   }
   return errors;
 }
@@ -197,7 +205,9 @@ export function serializeArticle(article) {
     works: article.works,
     ...(article.thumbnail ? { thumbnail: article.thumbnail } : {}),
     ...(article.createdAt ? { createdAt: article.createdAt } : {}),
-    ...(article.updatedAt ? { updatedAt: article.updatedAt } : {})
+    ...(article.updatedAt ? { updatedAt: article.updatedAt } : {}),
+    ...(article.contentUpdatedAt ? { contentUpdatedAt: article.contentUpdatedAt } : {}),
+    ...(article.metadataUpdatedAt ? { metadataUpdatedAt: article.metadataUpdatedAt } : {})
   };
 }
 
